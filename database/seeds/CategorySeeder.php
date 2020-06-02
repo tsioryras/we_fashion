@@ -1,7 +1,7 @@
 <?php
 
+use App\Category;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -12,12 +12,13 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
-            'name' => 'homme'
-        ]);
-
-        DB::table('categories')->insert([
-            'name' => 'femme'
-        ]);
+        $category = ['homme', 'femme'];
+        for ($i = 0; $i < sizeof($category); $i++) {
+            factory(Category::class)->create(
+                [
+                    'name' => $category[$i],
+                ]
+            );
+        }
     }
 }

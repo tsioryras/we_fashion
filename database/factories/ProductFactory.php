@@ -10,7 +10,7 @@ $factory->define(Product::class, function (Faker $faker) {
     $size = ['XS', 'S', 'M', 'L', 'XL'];
     $code = ['standard', 'onSale'];
 
-    $statusIndex = rand(0, 2);
+    $statusIndex = rand(0, 1);
     $date = ($statusIndex == 0) ? null : $faker->dateTime;
 
     return [
