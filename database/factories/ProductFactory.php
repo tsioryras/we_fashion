@@ -11,20 +11,16 @@ $factory->define(Product::class, function (Faker $faker) {
     $code = ['standard', 'onSale'];
 
     $statusIndex = rand(0, 2);
-    $sizeIndex = rand(0, 4);
-    $codeIndex = rand(0, 1);
-
     $date = ($statusIndex == 0) ? null : $faker->dateTime;
-    $price = $faker->randomFloat(2, 0, 1000);
 
     return [
         'name' => $faker->userName,
         'description' => $faker->paragraph(5),
         'status' => $status[$statusIndex],
-        'code' => $code[$codeIndex],
-        'size' => $size[$sizeIndex],
+        'code' => $faker->randomElement($code),
+        'size' => $faker->randomElement($size),
         'reference' => $faker->isbn10,
-        'price' => $price,
+        'price' => $faker->randomFloat(2, 0, 1000),
         'published_at' => $date
     ];
 });
