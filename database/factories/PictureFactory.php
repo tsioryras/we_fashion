@@ -4,10 +4,13 @@
 
 use App\Picture;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Storage;
+
+Storage::disk('local')->delete(Storage::allFiles());
 
 $factory->define(Picture::class, function (Faker $faker) {
     return [
-        'name' => 'Default',
+        'name' => $faker->jobTitle,
         'link' => "#"
     ];
 });
