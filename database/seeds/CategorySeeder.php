@@ -1,7 +1,7 @@
 <?php
 
-use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
@@ -12,7 +12,12 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create(['name' => 'homme',]);
-        factory(User::class)->create(['name' => 'femme',]);
+        DB::table('categories')->insert([
+            'name' => 'homme'
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'femme'
+        ]);
     }
 }

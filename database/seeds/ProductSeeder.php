@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class, 80)->create()->each(function ($product) {
+        factory(Product::class, 20)->create()->each(function ($product) {
             $category = Category::find(rand(1, 2));
 
             $product->category()->associate($category);

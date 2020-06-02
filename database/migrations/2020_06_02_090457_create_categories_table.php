@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id'); // clé primaire
             $table->string('name', 100); // VARCHAR 100
-            $table->dateTime('created_at')->nullable(); // DATETIME
+            $table->dateTime('created_at')->default(now()); // DATETIME
             $table->dateTime('updated_at')->nullable(); // DATETIME
         });
     }

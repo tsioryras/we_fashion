@@ -1,8 +1,10 @@
 <?php
 
+use App\Category;
 use App\Picture;
 use App\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PictureSeeder extends Seeder
 {
@@ -13,15 +15,26 @@ class PictureSeeder extends Seeder
      */
     public function run()
     {
+        Storage::disk('local')->delete(Storage::allFiles());
+        $storage = storage_path('app/public/img/products/');
+        $defaultImages = storage_path('defaultImages/');
+        $picturesFiles = [];
+
+        foreach (scandir($defaultImages) as $directory) {
+            if ($directory != '.' && $directory != '..') {
+                foreach (scandir($defaultImages . '/' . $directory) as $file) {
+                    if ($file != '.' && $file != '..') {
+                        copy($defaultImages . $directory . '/' . $file, $storage . $directory . '/' . $file);
+                        $picturesFiles[] = ['name' => explode('.', $file)[0], 'link' => $file, 'category' => $directory];
+                    }
+                }
+            }
+        }
+
         $products = Product::all()->all();
-        $count = sizeof($products) + 1;
         shuffle($products);
-        factory(Picture::class, $count)->create()->each(function ($picture, $products) {
-            $key = is_array($products) ? array_rand($products, 1) : null;
-            $product = is_array($products) ? $products[$key] : $products;
-            $picture->picture()->associate($product);
-            $picture->save();
-            unset($products[$key]);
+        factory(Picture::class, 20)->create()->each(function ($picture, $products) {
+
         });
     }
 }
