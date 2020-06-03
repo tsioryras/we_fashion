@@ -15,10 +15,10 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('link');
+            $table->string('link')->unique();
             $table->string('name');
             $table->dateTime('updated_at')->nullable(); // DATETIME
-            $table->dateTime('created_at')->nullable(); // DATETIME
+            $table->dateTime('created_at')->default(now()); // DATETIME
         });
     }
 
