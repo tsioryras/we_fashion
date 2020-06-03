@@ -29,10 +29,12 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-
+        $categoryFolder = public_path('storage/img/products/' . $request->name);
+        if (!file_exists($categoryFolder)) {
+            mkdir($categoryFolder, 0777);
+        }
         Category::create($request->all());
-
-        return redirect()->route('categories.index')->with('message', 'catégoire ' . $request->name . ' créée');
+        return redirect()->route('categories.index')->with('message', 'catégoire ' . strtoupper($request->name) . ' créée');
     }
 
     /**
@@ -48,7 +50,12 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
         $category = Category::find($id);
-        $category->update($request->all());
+        //renommer le dossier liés à la catégorie
+        $categoryOldFolder = public_path('storage/img/products/' . $category->name);
+        $categoryNewFolder = public_path('storage/img/products/' . $request->name);
+        if (rename($categoryOldFolder, $categoryNewFolder)) {
+            $category->update($request->all());
+        }
 
         return redirect()->route('categories.index');
     }
@@ -62,7 +69,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $name = $category->name;
+        $name = strtoupper($category->name);
         $category->delete();
 
         return redirect()->route('categories.index')->with('message', 'Catégorie ' . $name . ' supprimée');

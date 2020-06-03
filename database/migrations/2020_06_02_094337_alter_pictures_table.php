@@ -17,7 +17,7 @@ class AlterPicturesTable extends Migration
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('category_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('CASCADE');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
         });
     }
 
