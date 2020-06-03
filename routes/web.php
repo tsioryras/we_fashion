@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 //Routes Guests
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/product/{id}', 'HomeController@index')->where(['id' => '[0-9]+'])->name('product');
+Route::get('/product/category/{category}', 'HomeController@index')->where(['category' => '[aA-zZ]+'])->name('category');
+
+
+//Routes admin
+Auth::routes();
+Route::resource('products', 'ProductController')->middleware('auth');
+Route::resource('categories', 'CategoryController')->middleware('auth');
+Route::get('/admin', 'DashboardController@index')->middleware('auth');

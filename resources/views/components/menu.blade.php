@@ -10,25 +10,20 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- Left Side Of Navbar -->
-{{--            @if(Route::is('books.*')==false && Route::is('genders.*')==false)--}}
-{{--                <ul class="navbar-nav mr-auto">--}}
-{{--                  --}}
-{{--                </ul>--}}
-{{--            @endif--}}
+        {{--            @if(Route::is('books.*')==false && Route::is('genders.*')==false)--}}
+        {{--                <ul class="navbar-nav mr-auto">--}}
+        {{--                  --}}
+        {{--                </ul>--}}
+        {{--            @endif--}}
         <!-- Authentication Links -->
-            @guest
+        @guest
             <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
                 </ul>
-            @else
+        @else
             <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
@@ -38,17 +33,14 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-{{--                            <a class="dropdown-item" href="{{ route('admin.index') }}">Profile</a>--}}
-{{--                            <a class="dropdown-item" href="{{ route('genders.index') }}">CRUD genders</a>--}}
-{{--                            <a class="dropdown-item" href="{{ route('books.index') }}">CRUD Books</a>--}}
-{{--                            <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">--}}
-{{--                                {{ __('Logout') }}--}}
-{{--                            </a>--}}
-{{--                            <form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
-{{--                                  style="display: none;">--}}
-{{--                                @csrf--}}
-{{--                            </form>--}}
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
