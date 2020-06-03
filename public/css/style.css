@@ -1,12 +1,3 @@
-html,
-body {
-    height: 100%;
-}
-
-#page-content {
-    flex: 1 0 auto;
-}
-
-#sticky-footer {
-    margin-bottom: 0;
+.page-button.page-item {
+    background: #212529 !important;
 }

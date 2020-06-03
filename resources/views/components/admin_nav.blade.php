@@ -3,7 +3,7 @@
         <a class="nav-link" href="">{{strtoupper('produits')}}</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="">{{strtoupper('categories')}}</a>
+        <a class="nav-link" href="{{route('categories.index')}}">{{strtoupper('categories')}}</a>
     </li>
 
 </ul>
