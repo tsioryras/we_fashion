@@ -7,6 +7,7 @@
     <div class="modal fade" id="create" role="dialog">
         <div class="modal-dialog modal-sm">
             <form action="{{route('categories.store')}}" method="POST">
+                {{csrf_field()}}
                 <div class="modal-content">
                     <div class="modal-header">
                         <small class="modal-title">Nouvelle catégorie</small>
@@ -41,20 +42,22 @@
 @section('tbody')
     @forelse($categories as $category)
         <tr>
-            <td>{{$category->name}}</td>
+            <td>{{ucfirst($category->name)}}</td>
             <td>
-                <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit">
+                <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit{{$category->id}}">
                     {{ucfirst('edit')}}
                 </button>
-                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delete">
+                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delete{{$category->id}}">
                     {{ucfirst('delete')}}
                 </button>
             </td>
         </tr>
         <!-- Modal de création et d'édition-->
-        <div class="modal fade" id="edit" role="dialog">
+        <div class="modal fade" id="edit{{$category->id}}" role="dialog">
             <div class="modal-dialog modal-sm">
                 <form action="{{route('categories.update',$category->id)}}" method="POST">
+                    {{method_field('PUT')}}
+                    {{csrf_field()}}
                     <div class="modal-content">
                         <div class="modal-header">
                             <small class="modal-title">Modification catégorie</small>
@@ -68,7 +71,7 @@
                                 @endif
                                 <input type="text" class="form-control" id="name"
                                        aria-describedby="titleHelp" name="name"
-                                       value="@if(isset($category)){{$category->name}}@else{{old('name')}}@endif"
+                                       value="{{$category->name}}"
                                        placeholder="Edit category name" required/>
                             </div>
                         </div>
@@ -82,7 +85,7 @@
         </div>
 
         <!-- Modal de suppression-->
-        <div class="modal fade" id="delete" tabindex="-1" role="dialog"
+        <div class="modal fade" id="delete{{$category->id}}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -93,7 +96,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Voulez-vous vraiment supprimer cette catégorie?
+                        Voulez-vous vraiment supprimer la catégorie {{strtoupper($category->name)}}?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">

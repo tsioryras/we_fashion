@@ -29,9 +29,10 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
+
         Category::create($request->all());
 
-        return redirect()->route('categories.index')->with('message', 'catégoire créée');
+        return redirect()->route('categories.index')->with('message', 'catégoire ' . $request->name . ' créée');
     }
 
     /**
@@ -60,8 +61,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        $category = Category::find($id);
+        $name = $category->name;
+        $category->delete();
 
-        return redirect()->route('categories.index')->with('message', 'Catégorie supprimée');
+        return redirect()->route('categories.index')->with('message', 'Catégorie ' . $name . ' supprimée');
     }
 }
