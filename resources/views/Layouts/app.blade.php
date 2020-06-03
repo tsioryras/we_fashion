@@ -17,13 +17,13 @@
 </head>
 <body>
 <div id="app">
-{{--    @include('components.menu')--}}
+    {{--    @include('components.menu')--}}
     <main class="py-4">
         <div class="container">
             @yield('content')
         </div>
     </main>
-{{--    @include('components.footer')--}}
+    @include('components.footer')
 </div>
 <!-- Scripts -->
 @yield('js')
