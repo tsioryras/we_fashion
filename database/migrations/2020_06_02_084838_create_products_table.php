@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 100); // VARCHAR 100
             $table->text('description')->nullable(); // TEXT NULL
             $table->unsignedDouble('price')->default(0.0);
-            $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->nullable();
+            $table->json('size');
             $table->enum('status', ['unpublished', 'publish'])->default('unpublished');
             $table->enum('code', ['standard', 'onSale'])->default('standard');
             $table->string('reference', 16); // VARCHAR 16

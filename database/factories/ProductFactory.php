@@ -9,7 +9,14 @@ $factory->define(Product::class, function (Faker $faker) {
     $status = ['unpublished', 'publish'];
     $size = ['XS', 'S', 'M', 'L', 'XL'];
     $code = ['standard', 'onSale'];
-
+    $sizeNumber = rand(1, 5);
+    $productSizes = [];
+    for ($i = 0; $i < $sizeNumber; $i++) {
+        $index = rand(0, 4);
+        if (!in_array($size[$index], $productSizes)) {
+            $productSizes[] = $size[$index];
+        }
+    }
     $statusIndex = rand(0, 1);
     $date = ($statusIndex == 0) ? null : $faker->dateTime;
 
@@ -18,7 +25,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'description' => $faker->paragraph(5),
         'status' => $status[$statusIndex],
         'code' => $faker->randomElement($code),
-        'size' => $faker->randomElement($size),
+        'size' => $productSizes,
         'reference' => $faker->isbn10,
         'price' => $faker->randomFloat(2, 0, 1000),
         'published_at' => $date

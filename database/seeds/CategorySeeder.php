@@ -19,6 +19,10 @@ class CategorySeeder extends Seeder
                     'name' => $category[$i],
                 ]
             );
+            $folder = public_path('storage/img/products/' . $category[$i]);
+            if (!file_exists($folder)) {
+                mkdir(public_path('storage/img/products/' . $category[$i]));
+            }
         }
     }
 }
