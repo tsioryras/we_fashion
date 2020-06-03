@@ -14,8 +14,9 @@ class Controller extends BaseController
     {
         view()->composer('components.menu', function ($view) {
             $categories = Category::all();
-            $view->with('genres', $categories);
+            $view->with('categories', $categories);
         });
     }
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

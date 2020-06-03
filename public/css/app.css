@@ -1,4 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);html,
+body {
+    height: 100%;
+}
+
+#page-content {
+    flex: 1 0 auto;
+}
+
+#sticky-footer {
+    margin-bottom: 0;
+}@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)

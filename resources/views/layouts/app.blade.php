@@ -15,15 +15,15 @@
     @yield('css')
 </head>
 <body>
+@include('components.menu')
 <div id="app">
-    @include('components.menu')
     <main class="py-4">
         <div class="container">
             @yield('content')
         </div>
     </main>
-    @include('components.footer')
 </div>
+@include('components.footer')
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('js')
