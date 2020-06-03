@@ -1,6 +1,6 @@
 <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-        <a class="nav-link" href="">{{strtoupper('produits')}}</a>
+        <a class="nav-link" href="{{route('products.index')}}">{{strtoupper('produits')}}</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('categories.index')}}">{{strtoupper('categories')}}</a>
