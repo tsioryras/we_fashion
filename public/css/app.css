@@ -1,11 +1,58 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.page-item.active .page-link {
-    background-color: #000000 !important;
+@import url(https://fonts.googleapis.com/css?family=Nunito);body {
+    padding-bottom: 2rem;
+}
+
+li {
+    list-style: none;
+}
+
+.list > .row, .list {
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+.description {
+    margin-bottom: 1em;
+}
+
+.product {
+    margin-top: 1em;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.media-body {
+    padding-left: 2em;
+}
+
+.media > a:hover {
+    text-decoration: none;
+}
+
+.app_item {
+    margin: 0.25em;
+}
+
+.page-link {
+    color: #000000;
+}
+
+.page-item.active .page-link {
+    background-color: #343a40 !important;
     color: #ffffff !important;
-    border-color: #000000 !important;
+    border-color: #343a40 !important;
 }
 
 textarea#description {
-    min-height: 160px;
+    min-height: 50px;
     text-align: left;
 }
 
@@ -15,7 +62,7 @@ textarea#description {
     text-align: center;
 }
 
-#picture_preview{
+#picture_preview {
     height: 75%;
     margin-top: 0.125em;
     margin-bottom: 0.125em;

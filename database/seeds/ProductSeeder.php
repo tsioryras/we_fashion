@@ -15,13 +15,13 @@ class ProductSeeder extends Seeder
         $this->call(CategorySeeder::class);
         //10 produits de catégorie HOMME
         factory(Product::class, 10)->create()->each(function ($product) {
-            $category = Category::find(1);
+            $category = Category::where('name', '=', 'homme')->first();
             $product->category()->associate($category);
             $product->save();
         });
         //10 produits de catégorie FEMME
         factory(Product::class, 10)->create()->each(function ($product) {
-            $category = Category::find(2);
+            $category = Category::where('name', '=', 'femme')->first();
             $product->category()->associate($category);
             $product->save();
         });

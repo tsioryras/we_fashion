@@ -19,29 +19,24 @@ class PictureSeeder extends Seeder
         $storage = storage_path('app/public/img/products/');
         $defaultImages = storage_path('defaultImages/');
         $this->call(ProductSeeder::class);
-        $products = Product::all()->all();
-        $arrayKeys = array_keys($products);;
+        $MenProducts = Product::where('category_id', '=', 1)->get();
+        $WomenProducts = Product::where('category_id', '=', 2)->get();
+
         foreach (scandir($defaultImages) as $directory) {
             if ($directory != '.' && $directory != '..') {
-                foreach (scandir($defaultImages . '/' . $directory) as $file) {
+                $products = ($directory == 'homme') ? $MenProducts : $WomenProducts;
+
+                foreach (scandir($defaultImages . '/' . $directory) as $index => $file) {
                     if ($file != '.' && $file != '..') {
 
                         copy($defaultImages . $directory . '/' . $file, $storage . $directory . '/' . $file);
-                        $index = rand(0, sizeof($arrayKeys) - 1);
-                        $product = $products[$arrayKeys[$index]];
-                        while ($product->category->name != $directory) {
-                            $index = rand(0, sizeof($products) - 1);
-                            $product = $products[$arrayKeys[$index]];
-                        }
-                        unset($products[$index]);
-                        array_values($products);;
-                        $arrayKeys = array_keys($products);
+
                         $picture = factory(Picture::class)->create();
                         $picture->name = explode('.', $file)[0];
                         $picture->link = $file;
                         $category = Category::where('name', '=', $directory)->first();
                         $picture->category()->associate($category);
-                        $picture->product()->associate($product);
+                        $picture->product()->associate($products[$index - 2]);
                         $picture->save();
                     }
                 }
