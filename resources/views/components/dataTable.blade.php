@@ -13,8 +13,8 @@
             @yield('onTable')
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-striped responsive nowrap" style="width: 100%!important;">
-                <thead>
+            <table id="datatable" class="table table-striped responsive nowrap">
+                <thead class="thead-dark">
                 <tr>
                     @yield('thead')
                 </tr>
@@ -37,6 +37,7 @@
     <script>
         $(document).ready(function () {
             $('#datatable').DataTable({
+                    "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
                     "language": {
                         "sEmptyTable": "Aucune donnée disponible dans le tableau",
                         "sInfo": "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",

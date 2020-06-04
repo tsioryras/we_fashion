@@ -1,7 +1,7 @@
 @extends('components.dataTable')
 
 @section('onTable')
-    <button type="button" class="btn btn-outline-dark btn-sm" data-toggle="modal"
+    <button type="button" class="btn btn-outline-dark" data-toggle="modal"
             data-target="#create">{{ucfirst('nouvelle catégorie')}}
     </button>
     <div class="modal fade" id="create" role="dialog">
@@ -36,12 +36,14 @@
     </div>
 @endsection
 @section('thead')
+    <th>#</th>
     <th>{{strtoupper('nom')}}</th>
     <th>{{strtoupper('action')}}</th>
 @endsection
 @section('tbody')
     @forelse($categories as $category)
         <tr>
+            <td>{{ucfirst($category->id)}}</td>
             <td>{{ucfirst($category->name)}}</td>
             <td>
                 <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit{{$category->id}}">

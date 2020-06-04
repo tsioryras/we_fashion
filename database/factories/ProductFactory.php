@@ -14,9 +14,10 @@ $factory->define(Product::class, function (Faker $faker) {
     for ($i = 0; $i < $sizeNumber; $i++) {
         $index = rand(0, 4);
         if (!in_array($size[$index], $productSizes)) {
-            $productSizes[] = $size[$index];
+            $productSizes[$index] = $size[$index];
         }
     }
+    ksort($productSizes);
     $statusIndex = rand(0, 1);
     $date = ($statusIndex == 0) ? null : $faker->dateTime;
 
