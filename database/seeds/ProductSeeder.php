@@ -1,6 +1,6 @@
 <?php
 
-use App\Picture;
+use App\Category;
 use App\Product;
 use Illuminate\Database\Seeder;
 
@@ -8,18 +8,22 @@ class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
      * @return void
      */
     public function run()
     {
-        $this->call(PictureSeeder::class);
-        $pictures = Picture::all();
-        foreach ($pictures as $picture) {
-            $product = factory(Product::class)->create();
-            $product->category()->associate($picture->category);
-            $picture->product()->associate($product);
+        $this->call(CategorySeeder::class);
+        //10 produits de catégorie HOMME
+        factory(Product::class, 10)->create()->each(function ($product) {
+            $category = Category::find(1);
+            $product->category()->associate($category);
             $product->save();
-        }
+        });
+        //10 produits de catégorie FEMME
+        factory(Product::class, 10)->create()->each(function ($product) {
+            $category = Category::find(2);
+            $product->category()->associate($category);
+            $product->save();
+        });
     }
 }

@@ -6,7 +6,7 @@ use App\Product;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
-    $status = ['unpublished', 'publish'];
+    $status = ['unpublished', 'published'];
     $size = ['XS', 'S', 'M', 'L', 'XL'];
     $code = ['standard', 'onSale'];
     $sizeNumber = rand(1, 5);
@@ -25,7 +25,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->userName,
         'description' => $faker->paragraph(5),
         'status' => $status[$statusIndex],
-        'code' => $faker->randomElement($code),
+        'code' => $code[rand(0, 1)],
         'size' => $productSizes,
         'reference' => $faker->isbn10,
         'price' => $faker->randomFloat(2, 0, 1000),

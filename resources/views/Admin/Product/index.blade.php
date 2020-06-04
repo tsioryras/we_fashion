@@ -34,8 +34,9 @@
             </td>
             <td>{{ucfirst($product->status)}}</td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" href="{{route('products.edit',$product->id)}}"> <i
-                            class="fas fa-pencil"></i></a>
+                <a class="btn btn-sm btn-outline-dark" href="{{route('products.edit',$product->id)}}">
+                    <i class="fas fa-pencil"></i>
+                </a>
                 <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#delete{{$product->id}}">
                     <i class="fas fa-trash"></i>
                 </button>

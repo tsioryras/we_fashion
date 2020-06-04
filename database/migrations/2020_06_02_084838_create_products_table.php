@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable(); // TEXT NULL
             $table->unsignedDouble('price')->default(0.0);
             $table->json('size');
-            $table->enum('status', ['unpublished', 'publish'])->default('unpublished');
+            $table->enum('status', ['unpublished', 'published'])->default('unpublished');
             $table->enum('code', ['standard', 'onSale'])->default('standard');
             $table->string('reference', 16); // VARCHAR 16
             $table->dateTime('published_at')->nullable(); // DATETIME

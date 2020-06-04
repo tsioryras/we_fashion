@@ -10,6 +10,10 @@ class Product extends Model
         'size' => 'array'
     ];
 
+    protected $fillable = [
+        'name', 'description', 'status', 'code', 'size', 'price'
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

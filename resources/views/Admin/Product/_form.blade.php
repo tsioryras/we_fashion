@@ -7,7 +7,7 @@
         $sizes = ['XS','S','M','L','XL'];
         $codes = ['standard','onSale'];
     @endphp
-    <h1>
+    <h2>
         @if(Route::is('products.create'))
             {{ucfirst('ajout d\'un nouveau produit')}}
         @endif
@@ -15,7 +15,7 @@
             {{ucfirst('modification du produit '.strtoupper($product->name))}}
             @php $edit = true @endphp
         @endif
-    </h1>
+    </h2><br>
     <form action="@if($edit){{route('products.update',$product->id)}} @else {{route('products.store')}} @endif"
           enctype="multipart/form-data" method="POST">
         @if($edit)
@@ -42,17 +42,24 @@
                         <small class="alert-warning">{{$errors->first('description')}}</small>
                     @endif
                     <textarea class="form-control" name="description" id="description"
-                              placeholder="product resume or description"
+                              placeholder="Déscription du produit"
                               required>@if($edit && isset($product)){{trim($product->description)}}@else{{old('description')}}@endif</textarea>
                 </div>
                 <!--CATEGORY-->
                 <div class="form-group">
-                    <label for="gender">{{ucfirst('catégorie')}}</label>
-                    <select id="gender" name="gender" class="form-control">
+                    <label for="category">{{ucfirst('catégorie')}}</label>
+                    <select id="category" name="category" class="form-control">
                         <option value="0">aucune</option>
-                        @forelse($categories as $id =>$name)
-                            <option @if($edit && isset($product) && old($product->category) == $id) selected @endif
-                            @if(!$edit && old('category') == $id) selected @endif value="{{$id}}">{{$name}}</option>
+                        @forelse($categories as $category)
+                            <option @if($edit && isset($product) && ($product->category_id == $category->id || old('category')==$category->id))
+                                    selected
+                                    @endif
+                                    @if(!$edit && old('category') == $category->id)
+                                    selected
+                                    @endif
+                                    value="{{$category->id}}">
+                                {{$category->name}}
+                            </option>
                         @empty
                         @endforelse
                     </select>
@@ -67,7 +74,7 @@
                     @forelse($sizes as $size)
                         <div class="form-check-inline">
                             <input class="form-check-input"
-                                   @if(($edit && isset($product) && in_array($size,$product->size)) || (is_array(old('size')) && in_array($id,old('size'))))
+                                   @if(($edit && isset($product) && in_array(strtoupper($size),$product->size)) || (is_array(old('size')) && in_array($id,old('size'))))
                                    checked
                                    @endif
                                    name="size[]"
@@ -85,10 +92,15 @@
             <!--PICTURE-->
             <div class="col-md-6">
                 <div class="form-group">
-                    <div id="picture_preview_card" class="d-none">
-                        <img id="picture_preview"
-                             src="@if($edit && isset($product) && isset($product->picture)){{asset('storage/img/products/'.$product->category->name.'/'.$product->picture->link)}}@endif">
+                    <div id="picture_preview_card"
+                         @if(($edit && !isset($product->picture)) || !$edit)class="d-none"@endif>
+                        <button type="button" id="remove_picture" class="btn btn-sm btn-outline-danger">
+                            supprimer
+                        </button>
                         <br>
+                        <img id="picture_preview"
+                             src="@if($edit && isset($product) && isset($product->picture)){{asset('storage/img/products/'.$product->category->name.'/'.$product->picture->link)}}@endif"
+                             alt="picture">
                     </div>
                     {{old('product_picture')}}
                     <h6 class="hint_picture">{{ucfirst('image du produit')}}</h6>
@@ -107,7 +119,7 @@
                     @forelse($status as $state)
                         <div class="form-check">
                             <input class="form-check-input"
-                                   @if(($edit && isset($product) && strtolower($product->status)==$state) || old('status')== $state)
+                                   @if(($edit && isset($product) && strtolower($product->status)==strtolower($state)) || old('status')== $state)
                                    checked
                                    @endif
                                    name="status"
@@ -127,10 +139,10 @@
                     @forelse($codes as $code)
                         <div class="form-check">
                             <input class="form-check-input"
-                                   @if(($edit && isset($product) && strtolower($product->code)==$code) || old('code')== $code)
+                                   @if(($edit && isset($product) && strtolower($product->code)==strtolower($code)) || old('code')== $code)
                                    checked
                                    @endif
-                                   name="status"
+                                   name="code"
                                    type="radio"
                                    value="{{$code}}"
                                    id="{{$code}}"/>
@@ -143,12 +155,12 @@
                 </div>
                 <!--PRICE-->
                 <div class="form-group">
-                    <label class="control-label" for="price">{{ucfirst('prix')}}</label>
+                    <label class="control-label" for="price">{{ucfirst('prix (€)')}}</label>
                     @if($errors->has('price'))
                         <small class="alert-warning">{{$errors->first('price')}}</small>
                     @endif
                     <input class="form-control" name="price" id="price"
-                           value="@if($edit && $product->price!=null) {{$product->score}} @else {{old('price')}} @endif"/>
+                           value="@if($edit && $product->price!=null) {{$product->price}} @else {{old('price')}} @endif"/>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Save product</button>
@@ -175,6 +187,7 @@
 
             if ($('#picture_preview').attr('src') != '') {
                 $('#picture_preview_card').removeClass('d-none');
+                $('.hint_picture').html('Changer l\'image');
             }
 
             $.trim($('#description').val());
@@ -182,7 +195,12 @@
             $('#product_picture').change(function () {
                 readURL(this);
                 $('#picture_preview_card').removeClass('d-none');
-                $('.hint_picture').html('Choisir une autre');
+                $('.hint_picture').html('Changer l\'image');
+            });
+
+            $('#remove_picture').on('click', function () {
+                $('#picture_preview').attr('src', '');
+                $('#picture_preview_card').addClass('d-none');
             });
         });
     </script>

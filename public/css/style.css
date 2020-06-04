@@ -4,18 +4,19 @@
     border-color: #000000 !important;
 }
 
-textarea#product-description {
-    min-height: 10rem;
+textarea#description {
+    min-height: 160px;
     text-align: left;
 }
 
 #picture_preview_card {
-    height: 250px;
+    height: 300px;
     float: right;
     text-align: center;
 }
 
 #picture_preview{
-    height: 90%;
+    height: 75%;
+    margin-top: 0.125em;
     margin-bottom: 0.125em;
 }
