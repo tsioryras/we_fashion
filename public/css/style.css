@@ -1,3 +1,7 @@
+.navbar-brand {
+    color: #66EB9A !important;
+}
+
 li {
     list-style: none;
 }
@@ -76,4 +80,8 @@ textarea#description {
 
 li.code {
     color: #4c110f;
+}
+
+footer li a, footer {
+    color: rgba(255, 255, 255, 0.5) !important;
 }

@@ -1,16 +1,10 @@
 @if(!Route::is('login'))
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-        @guest
-
-            <div class="container text-center">
-                Links
-            </div>
-        @else
-            <div class="container text-center">
-                <small>Copyright &copy; We Fashion 2020</small>
-                <br>
-                <small> All rights reserved</small>
-            </div>
+    <footer class="page-footer font-small bg-dark pt-4 text-white">
+        @if(!Route::is('categories.*') && !Route::is('products.*') && !Route::is('admin') )
+            @include('components.guest_footer')
         @endif
+        <div class="footer-copyright text-center py-3">© 2020 Copyright
+            <a href="https://tsioryras.eu">TsioryRas</a>
+        </div>
     </footer>
 @endif

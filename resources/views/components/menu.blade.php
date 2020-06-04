@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            We Fashion
+        <a class="navbar-brand" href="{{ route('product_home') }}">
+            {{strtoupper(config('app.name'))}}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,7 +13,11 @@
             @guest
                 @include('components.guest_nav')
             @else
-                @include('components.admin_nav')
+                @if(Route::is('categories.*') || Route::is('products.*') || Route::is('admin') )
+                    @include('components.admin_nav')
+                @else
+                    @include('components.guest_nav')
+                @endif
             @endif
 
         </div>
