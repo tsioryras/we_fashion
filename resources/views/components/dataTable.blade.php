@@ -3,7 +3,6 @@
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
 @endsection
 
 @section('content')
@@ -32,12 +31,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#datatable').DataTable({
-                    "lengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
+                    "lengthMenu": [[15, 25, 50], [15, 25, 50]],
                     "language": {
                         "sEmptyTable": "Aucune donnée disponible dans le tableau",
                         "sInfo": "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
@@ -70,6 +67,10 @@
                     }
                 }
             );
+
+            setTimeout(function () {
+                $('button.close-alert').click();
+            }, 3000);
         });
     </script>
 @endsection

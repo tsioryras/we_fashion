@@ -24,10 +24,11 @@
         {{csrf_field()}}
         <div class="row">
             <div class="col-md-6">
+
                 <!--NAME-->
                 <div class="form-group">
                     <label for="name">{{ucfirst('nom du produit')}}</label>
-                    @if($errors->has('title'))
+                    @if($errors->has('name'))
                         <small class="alert-warning">{{$errors->first('name')}}</small>
                     @endif
                     <input type="text" class="form-control" id="name"
@@ -35,6 +36,19 @@
                            value="@if($edit && isset($product)){{$product->name}}@else{{old('name')}}@endif"
                            placeholder="nom du produit" required/>
                 </div>
+
+                <!--REFERENCE-->
+                <div class="form-group">
+                    <label for="reference">{{ucfirst('référence du produit')}}</label>
+                    @if($errors->has('reference'))
+                        <small class="alert-warning">{{$errors->first('reference')}}</small>
+                    @endif
+                    <input type="text" class="form-control" id="reference"
+                           aria-describedby="titleHelp" name="reference"
+                           value="@if($edit && isset($product)){{$product->reference}}@else{{old('reference')}}@endif"
+                           placeholder="réference du produit" required/>
+                </div>
+
                 <!--DESCRIPTION-->
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -45,11 +59,14 @@
                               placeholder="Déscription du produit"
                               required>@if($edit && isset($product)){{trim($product->description)}}@else{{old('description')}}@endif</textarea>
                 </div>
+
                 <!--CATEGORY-->
                 <div class="form-group">
                     <label for="category">{{ucfirst('catégorie')}}</label>
+                    @if($errors->has('category'))
+                        <small class="alert-warning">{{$errors->first('category')}}</small>
+                    @endif
                     <select id="category" name="category" class="form-control">
-                        <option value="0">aucune</option>
                         @forelse($categories as $category)
                             <option @if($edit && isset($product) && ($product->category_id == $category->id || old('category')==$category->id))
                                     selected
@@ -64,6 +81,7 @@
                         @endforelse
                     </select>
                 </div>
+
                 <!--SIZE-->
                 <div class="form-group">
                     <label>{{ucfirst('choisissez la(les) taille(s) disponible pour le produit')}}</label>
@@ -74,7 +92,7 @@
                     @forelse($sizes as $size)
                         <div class="form-check-inline">
                             <input class="form-check-input"
-                                   @if(($edit && isset($product) && in_array(strtoupper($size),$product->size)) || (is_array(old('size')) && in_array($id,old('size'))))
+                                   @if(($edit && isset($product) && in_array(strtoupper($size),$product->size)) || (is_array(old('size')) && in_array($size,old('size'))))
                                    checked
                                    @endif
                                    name="size[]"
@@ -89,21 +107,26 @@
                     @endforelse
                 </div>
             </div>
+
             <!--PICTURE-->
             <div class="col-md-6">
                 <div class="form-group">
+                    @if($errors->has('product_picture'))
+                        <small class="alert-warning">{{$errors->first('product_picture')}}</small>
+                    @endif
                     <div id="picture_preview_card"
                          @if(($edit && !isset($product->picture)) || !$edit)class="d-none"@endif>
                         <button type="button" id="remove_picture" class="btn btn-sm btn-outline-danger">
                             supprimer
                         </button>
                         <br>
+                        <input type="hidden" name="picture_src" id="picture_src" value="">
                         <img id="picture_preview"
                              src="@if($edit && isset($product) && isset($product->picture)){{asset('storage/img/products/'.$product->category->name.'/'.$product->picture->link)}}@endif"
                              alt="picture">
                     </div>
                     {{old('product_picture')}}
-                    <h6 class="hint_picture">{{ucfirst('image du produit')}}</h6>
+                    <h6 class="hint_picture">{{ucfirst('Ajoutez une image au produit')}}</h6>
                     <input type="file" class="custom-file-input d-none"
                            name="product_picture" id="product_picture"/>
                     <label class="btn btn-outline-secondary file-label"
@@ -113,8 +136,12 @@
                         <small class="alert-warning">{{$errors->first('product_picture')}}</small>
                     @endif
                 </div>
+
                 <!--STATUS-->
                 <div class="form-group">
+                    @if($errors->has('status'))
+                        <small class="alert-warning">{{$errors->first('status')}}</small>
+                    @endif
                     <h6>{{ucfirst('etat')}}</h6>
                     @forelse($status as $state)
                         <div class="form-check">
@@ -133,8 +160,12 @@
                     @empty
                     @endforelse
                 </div>
+
                 <!--CODE-->
                 <div class="form-group">
+                    @if($errors->has('code'))
+                        <small class="alert-warning">{{$errors->first('code')}}</small>
+                    @endif
                     <h6>{{ucfirst('code')}}</h6>
                     @forelse($codes as $code)
                         <div class="form-check">
@@ -153,6 +184,7 @@
                     @empty
                     @endforelse
                 </div>
+
                 <!--PRICE-->
                 <div class="form-group">
                     <label class="control-label" for="price">{{ucfirst('prix (€)')}}</label>
@@ -163,7 +195,7 @@
                            value="@if($edit && $product->price!=null) {{$product->price}} @else {{old('price')}} @endif"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save product</button>
+                    <button type="submit" class="btn btn-primary">{{ucfirst('enregistrer')}}</button>
                 </div>
             </div>
         </div>
@@ -180,12 +212,12 @@
                     reader.onload = function (e) {
                         $('#picture_preview').attr('src', e.target.result);
                     }
-
                     reader.readAsDataURL(input.files[0]);
                 }
             }
 
             if ($('#picture_preview').attr('src') != '') {
+                $('#picture_src').val($('#picture_preview').attr('src'));
                 $('#picture_preview_card').removeClass('d-none');
                 $('.hint_picture').html('Changer l\'image');
             }
@@ -201,7 +233,10 @@
             $('#remove_picture').on('click', function () {
                 $('#picture_preview').attr('src', '');
                 $('#picture_preview_card').addClass('d-none');
+                $('#picture_src').val('');
             });
+
+            console.log($('#picture_src').val());
         });
     </script>
 @endsection

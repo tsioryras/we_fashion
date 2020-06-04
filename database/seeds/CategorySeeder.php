@@ -12,7 +12,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $category = ['homme', 'femme'];
+        $category = ['homme', 'femme', 'autre'];
         for ($i = 0; $i < sizeof($category); $i++) {
             factory(Category::class)->create(
                 [
