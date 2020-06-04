@@ -10,6 +10,9 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    /**
+     * Controller constructor.
+     */
     public function __construct()
     {
         view()->composer('components.menu', function ($view) {

@@ -8,6 +8,10 @@ use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * Class ProductController
+ * @package App\Http\Controllers
+ */
 class ProductController extends Controller
 {
     private $pictureFolder;
