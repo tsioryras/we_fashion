@@ -1,5 +1,23 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.page-button.page-item {
-    background: #212529 !important;
+@import url(https://fonts.googleapis.com/css?family=Nunito);.page-item.active .page-link {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+}
+
+textarea#product-description {
+    min-height: 10rem;
+    text-align: left;
+}
+
+#picture_preview_card {
+    height: 250px;
+    float: right;
+    text-align: center;
+}
+
+#picture_preview{
+    height: 90%;
+    margin-bottom: 0.125em;
 }@charset "UTF-8";
 
 /*!

@@ -13,7 +13,7 @@
             @yield('onTable')
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-striped responsive nowrap">
+            <table id="datatable" class="table table-sm table-striped responsive nowrap">
                 <thead class="thead-dark">
                 <tr>
                     @yield('thead')
