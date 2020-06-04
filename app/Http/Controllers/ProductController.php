@@ -163,8 +163,11 @@ class ProductController extends Controller
         if ($picture != null && $request->input('picture_src') == null) {
             $picture->product()->dissociate();
             $picture->category()->dissociate();
+            $image = $this->pictureFolder . $product->category->name . '/' . $picture->link;
+            if (file_exists($image) && !is_dir($image)) {
+                unlink($this->pictureFolder . $category->name . '/' . $picture->link);
+            }
             $picture->delete();
-            unlink($this->pictureFolder . $category->name . '/' . $picture->link);
         }
 
         $product->save();
@@ -187,8 +190,8 @@ class ProductController extends Controller
             $image = $this->pictureFolder . $product->category->name . '/' . $picture->link;
             if (file_exists($image) && !is_dir($image)) {
                 $picture->product()->dissociate();
-                $picture->delete();
                 unlink($image);
+                $picture->delete();
             }
         }
         $product->category()->dissociate();
