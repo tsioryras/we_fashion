@@ -1,8 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);body {
-    padding-bottom: 2rem;
-}
-
-li {
+@import url(https://fonts.googleapis.com/css?family=Nunito);li {
     list-style: none;
 }
 
@@ -17,6 +13,10 @@ li {
 
 .product {
     margin-top: 1em;
+}
+
+a:hover {
+    text-decoration: none !important;
 }
 
 .links > a {
@@ -66,6 +66,16 @@ textarea#description {
     height: 75%;
     margin-top: 0.125em;
     margin-bottom: 0.125em;
+}
+
+.product-info, .product-info li {
+    background: none !important;
+    border: none !important;
+    padding-left: 0 !important;
+}
+
+li.code {
+    color: #4c110f;
 }@charset "UTF-8";
 
 /*!

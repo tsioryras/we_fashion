@@ -17,10 +17,9 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{$product->name}}</h5>
+                        <h4 class="card-title">{{$product->name}}</h4>
                         <div class="description">
-                            {{ Str::limit($product->description, 100, $end='...') }}
-                            <a href="{{route('product',['id'=>$product->id])}}">[Lire la suite]</a>
+                            {{ Str::limit($product->description, 50, $end='...') }}
                         </div>
                     </div>
                 </div>
@@ -30,7 +29,7 @@
         @endforelse
     </div>
     @if(count($products)>0)
-        <div class="row">
+        <div class="row text-center">
             <div class="col-md-4 col-md-offset-4">
                 {{$products->links()}}
             </div>

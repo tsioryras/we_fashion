@@ -21,8 +21,15 @@ class HomeController extends Controller
         return view('Home.index', ['products' => $products]);
     }
 
-    public function show($id){
+    public function byCode($slug = "onSale")
+    {
+        $products = Product::where('code', '=', $slug)->paginate(6);
+        return view('Home.index', ['products' => $products]);
+    }
+
+    public function show($id)
+    {
         $product = Product::find($id);
-        return view('Home.show', ['products' => $product]);
+        return view('Home.show', ['product' => $product]);
     }
 }
