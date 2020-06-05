@@ -1,8 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('product_home') }}">
-            {{strtoupper(config('app.name'))}}
-        </a>
+        @guest
+            <a class="navbar-brand" href="{{ route('product_home') }}">
+                {{strtoupper(config('app.name'))}}
+            </a>
+        @else
+            <span class="navbar-brand">
+                {{strtoupper(config('app.name'))}}
+            </span>
+            <a href="{{ route('product_home') }}">
+                {{strtoupper(config('app.name'))}}
+            </a>
+        @endif
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

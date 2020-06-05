@@ -24,9 +24,9 @@
             <td>{{ucfirst($product->category->name)}}</td>
             <td>{{ucfirst($product->price)}}</td>
             <td>
-                @forelse($product->size as $size)
+                @forelse($product->size as $key =>$size)
                     {{strtoupper($size)}}
-                    @if($size!=array_key_last($product->size))
+                    @if($key!=array_key_last($product->size))
                         /
                     @endif
                 @empty
