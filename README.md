@@ -1,14 +1,24 @@
 ## Installer l'application
-o
-Pour pouvoir utiliser l'applicatino, voici les commandes à éxécuter:
+
+Pour l'installation, allez dans le répertoire de votre choix et ouvrez-y votre 
+console ou invite de commande.
+
+Ensuite lancer la commande :
+- git clone https://github.com/tsioryras/we_fashion.git
+- ou téléchargez le fichier we_fashion-master.zip
+
+Une fois le téléchargement fini, lancez votre serveur local et modifier le fichier .env en fonction de votre environnement.
+
+Pour pouvoir utiliser l'application, déplacez-vous dans le dossier de l'application 
+puis éxecutez le commandes suivantes:
 - composer install
 - npm install
 - npm run dev
-- php artisan migrate:refresh --seed
+- php artisan db:seed --class=DatabaseSeeder
 - php artisan serve
 
-Assurez-vous d'avoir bien configurer le fichier .env 
-
+Enfin, ouvrez votre navigateur tapez dans votre 
+ 
 ##Outils et languages
 
 PHPSTORM
