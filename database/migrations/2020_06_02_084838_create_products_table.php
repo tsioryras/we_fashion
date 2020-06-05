@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->enum('status', ['unpublished', 'published'])->default('unpublished');
             $table->enum('code', ['standard', 'onSale'])->default('standard');
             $table->string('reference', 16); // VARCHAR 16
+            $table->unsignedInteger('stock'); // INTEGER 16
             $table->dateTime('published_at')->nullable(); // DATETIME
             $table->dateTime('updated_at')->nullable(); // DATETIME
             $table->dateTime('created_at')->default(now()); // DATETIME

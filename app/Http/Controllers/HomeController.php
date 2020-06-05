@@ -18,7 +18,9 @@ class HomeController extends Controller
     {
         $count = Product::all()->count();
         $products = Product::paginate(6);
-        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => 'accueil']);
+
+        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => '']);
+
     }
 
     /**
@@ -30,7 +32,9 @@ class HomeController extends Controller
         $category = Category::where('name', '=', $slug)->first();
         $count = $products = Product::where('category_id', '=', $category->id)->count();
         $products = Product::where('category_id', '=', $category->id)->paginate(6);
+
         return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => $slug]);
+
     }
 
     /**
