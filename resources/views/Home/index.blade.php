@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1></h1>
+    <div class="row">
+        <div class="offset-10">
+            <button type="button" class="btn-outline-success btn notif">
+                {{ucfirst('sélection de ').$count.' produits ' .strtoupper($slug)}}
+            </button>
+        </div>
+
+    </div>
     <div class="row">
         @forelse($products as $product)
             <div class="col-md-4">

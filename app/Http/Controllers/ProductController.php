@@ -6,7 +6,6 @@ use App\Category;
 use App\Picture;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * Class ProductController
@@ -75,7 +74,7 @@ class ProductController extends Controller
             $newFile = $request->file('product_picture')->getPathname();
             $originalName = $request->file('product_picture')->getClientOriginalName();
             $fileExtension = explode(".", $originalName)[1];
-            $newFileName = substr(Hash::make($product->name), 0, 20);
+            $newFileName = substr(str_replace(' ', '', $product->id . $product->reference), 0, 20);
             $pictureLink = $newFileName . "." . $fileExtension;
 
             $picture = new Picture();
@@ -139,7 +138,7 @@ class ProductController extends Controller
             $newFile = $request->file('product_picture')->getPathname();
             $originalName = $request->file('product_picture')->getClientOriginalName();
             $fileExtension = explode(".", $originalName)[1];
-            $newFileName = $product->id . $product->reference;
+            $newFileName = substr(str_replace(' ', '', $product->id . $product->reference), 0, 20);
             $pictureLink = $newFileName . "." . $fileExtension;
 
             if ($picture == null) {
