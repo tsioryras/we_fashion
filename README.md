@@ -17,7 +17,11 @@ puis éxecutez le commandes suivantes:
 - php artisan db:seed --class=DatabaseSeeder
 - php artisan serve
 
-Enfin, ouvrez votre navigateur tapez dans votre 
+Enfin, ouvrez votre navigateur tapez dans votre barre d'addresse http://127.0.0.1:8000
+
+Si vous voulez réinitialiser les données, éxécutez la commande:
+- php artisan migrate:refresh --seed
+
  
 ##Outils et languages
 

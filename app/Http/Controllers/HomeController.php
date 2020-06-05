@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 class HomeController extends Controller
 {
     private $paginate = 6;
-    private $cacheTime = 0;
+    private $cacheTime = 60;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -23,11 +23,11 @@ class HomeController extends Controller
         $prefix = request()->page ?? '1';
         $path = 'home.page.' . $prefix;
 
-        $products = Cache::remember($path, now()->addMinutes($this->cacheTime), function () {
+        $products = Cache::remember($path, now()->addSeconds($this->cacheTime), function () {
             return Product::with('picture', 'category')->paginate($this->paginate); // pagination
         });
 
-        $count = Cache::remember('products.count', now()->addMinutes($this->cacheTime), function () {
+        $count = Cache::remember('products.count', now()->addSeconds($this->cacheTime), function () {
             return Product::all()->count();
         });
 
@@ -47,11 +47,11 @@ class HomeController extends Controller
 
         $category = Category::where('name', '=', $slug)->first();
 
-        $count = Cache::remember('products' . $slug . '.count', now()->addMinutes($this->cacheTime), function () use ($category) {
+        $count = Cache::remember('products' . $slug . '.count', now()->addSeconds($this->cacheTime), function () use ($category) {
             return Product::where('category_id', '=', $category->id)->count();
         });
 
-        $products = Cache::remember($path, now()->addMinutes($this->cacheTime), function () use ($category) {
+        $products = Cache::remember($path, now()->addSeconds($this->cacheTime), function () use ($category) {
             return Product::where('category_id', '=', $category->id)->with('picture', 'category')->paginate($this->paginate); // pagination
         });
 
@@ -67,11 +67,11 @@ class HomeController extends Controller
         $prefix = request()->page ?? '1';
         $path = 'home.' . $slug . '.page.' . $prefix;
 
-        $count = Cache::remember('products' . $slug . '.count', now()->addMinutes($this->cacheTime), function () use ($slug) {
+        $count = Cache::remember('products' . $slug . '.count', now()->addSeconds($this->cacheTime), function () use ($slug) {
             return Product::where('code', '=', $slug)->count();
         });
 
-        $products = Cache::remember($path, now()->addMinutes($this->cacheTime), function () use ($slug) {
+        $products = Cache::remember($path, now()->addSeconds($this->cacheTime), function () use ($slug) {
             return Product::where('code', '=', $slug)->paginate($this->paginate); // pagination
         });
 

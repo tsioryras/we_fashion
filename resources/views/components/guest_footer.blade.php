@@ -1,5 +1,5 @@
 <hr>
-<div class="container-fluid">
+<div class="container-fluid pt-4">
     <div class="row">
         <div class="col-md-4 mb-md-0 mb-3 text-center">
             <h5>Informations</h5>

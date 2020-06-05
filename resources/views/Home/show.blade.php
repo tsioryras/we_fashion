@@ -27,7 +27,9 @@
                 </li>
                 <li class="list-group-item">{{ucfirst($product->description)}}</li>
                 <li class="list-group-item">
-                    <button type="button" class="btn btn-success">{{'acheter'}}</button>
+                    <button type="button" class="btn btn-success">{{strtoupper('acheter ')}}<i
+                                class="fa fa-shopping-cart"></i>
+                    </button>
                 </li>
             </ul>
         </div>

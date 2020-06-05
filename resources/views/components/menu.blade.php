@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
-        @guest
+        @if(!Route::is('categories.*') && !Route::is('products.*') && !Route::is('admin') )
             <a class="navbar-brand" href="{{ route('product_home') }}">
                 {{strtoupper(config('app.name'))}}
             </a>
