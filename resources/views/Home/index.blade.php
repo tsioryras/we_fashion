@@ -2,16 +2,10 @@
 
 @section('content')
     <div class="row">
-<<<<<<< HEAD
         <div class="col-md-2"> {{strtoupper($slug)}}</div>
         <div class="offset-8">
             <button type="button" class="btn-outline-success btn notif">
                 {{$count.' produits '}}
-=======
-        <div class="offset-10">
-            <button type="button" class="btn-outline-success btn notif">
-                {{ucfirst('sélection de ').$count.' produits ' .strtoupper($slug)}}
->>>>>>> 899309a567efdb0f40d3ba74b8b99c79af40a590
             </button>
         </div>
 
