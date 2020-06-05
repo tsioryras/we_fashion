@@ -81,35 +81,10 @@
                         @endforelse
                     </select>
                 </div>
-
-                <!--SIZE-->
-                <div class="form-group">
-                    <label>{{ucfirst('choisissez la(les) taille(s) disponible pour le produit')}}</label>
-                    @if($errors->has('size'))
-                        <small class="alert-warning">{{$errors->first('size')}}</small>
-                    @endif
-                    <br>
-                    @forelse($sizes as $size)
-                        <div class="form-check-inline">
-                            <input class="form-check-input"
-                                   @if(($edit && isset($product) && in_array(strtoupper($size),$product->size)) || (is_array(old('size')) && in_array($size,old('size'))))
-                                   checked
-                                   @endif
-                                   name="size[]"
-                                   type="checkbox"
-                                   value="{{$size}}"
-                                   id="{{strtolower($size)}}">
-                            <label class="control-label" for="{{strtolower($size)}}">
-                                {{$size}}
-                            </label>
-                        </div>
-                    @empty
-                    @endforelse
-                </div>
             </div>
 
-            <!--PICTURE-->
             <div class="col-md-6">
+                <!--PICTURE-->
                 <div class="form-group">
                     @if($errors->has('product_picture'))
                         <small class="alert-warning">{{$errors->first('product_picture')}}</small>
@@ -140,8 +115,8 @@
                     @endif
                     <h6>{{ucfirst('etat')}}</h6>
                     @forelse($status as $state)
-                        <div class="form-check">
-                            <input class="form-check-input"
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input"
                                    @if(($edit && isset($product) && strtolower($product->status)==strtolower($state)) || old('status')== $state)
                                    checked
                                    @endif
@@ -149,7 +124,7 @@
                                    type="radio"
                                    value="{{$state}}"
                                    id="{{$state}}"/>
-                            <label class="control-label" for="{{$state}}">
+                            <label class="custom-control-label" for="{{$state}}">
                                 {{$state}}
                             </label>
                         </div>
@@ -164,8 +139,8 @@
                     @endif
                     <h6>{{ucfirst('code')}}</h6>
                     @forelse($codes as $code)
-                        <div class="form-check">
-                            <input class="form-check-input"
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input"
                                    @if(($edit && isset($product) && strtolower($product->code)==strtolower($code)) || old('code')== $code)
                                    checked
                                    @endif
@@ -173,8 +148,33 @@
                                    type="radio"
                                    value="{{$code}}"
                                    id="{{$code}}"/>
-                            <label class="control-label" for="{{$code}}">
+                            <label class="custom-control-label" for="{{$code}}">
                                 {{$code}}
+                            </label>
+                        </div>
+                    @empty
+                    @endforelse
+                </div>
+
+                <!--SIZE-->
+                <div class="form-group">
+                    <label>{{ucfirst('choisissez la(les) taille(s) disponible pour le produit')}}</label>
+                    @if($errors->has('size'))
+                        <small class="alert-warning">{{$errors->first('size')}}</small>
+                    @endif
+                    <br>
+                    @forelse($sizes as $size)
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input class="custom-control-input"
+                                   @if(($edit && isset($product) && in_array(strtoupper($size),$product->size)) || (is_array(old('size')) && in_array($size,old('size'))))
+                                   checked
+                                   @endif
+                                   name="size[]"
+                                   type="checkbox"
+                                   value="{{$size}}"
+                                   id="{{strtolower($size)}}">
+                            <label class="custom-control-label" for="{{strtolower($size)}}">
+                                {{$size}}
                             </label>
                         </div>
                     @empty
@@ -191,7 +191,8 @@
                            value="@if($edit && $product->price!=null) {{$product->price}} @else {{old('price')}} @endif"/>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">{{ucfirst('enregistrer')}}</button>
+                    <button type="submit" title="enregistrer"
+                            class="btn btn-success">{{ucfirst('enregistrer')}}</button>
                 </div>
             </div>
         </div>

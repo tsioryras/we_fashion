@@ -19,8 +19,8 @@
         <div class="col-md-4 mb-md-0 mb-3">
             <h5>Réseaux sociaux</h5>
             <ul class="list-unstyled">
-                <li><a href="#"><i class="fas fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fas fa-instagram"></i></a></li>
+                <li><a href="https://facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="https://instagram.com/"><i class="fa fa-instagram"></i></a></li>
                 <li><a href="#">Inscrivez-vous à la newsletter</a></li>
             </ul>
         </div>
