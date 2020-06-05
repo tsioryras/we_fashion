@@ -19,7 +19,7 @@ class HomeController extends Controller
         $count = Product::all()->count();
         $products = Product::paginate(6);
 
-        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => '']);
+        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => 'accueil']);
     }
 
     /**
