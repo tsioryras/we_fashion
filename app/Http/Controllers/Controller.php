@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,8 +17,14 @@ class Controller extends BaseController
     public function __construct()
     {
         view()->composer('components.menu', function ($view) {
+            $categoriesName = [];
             $categories = Category::all();
-            $view->with('categories', $categories);
+            foreach ($categories as $category) {
+                if (Product::where('category_id', '=', $category->id)->count() > 0) {
+                    $categoriesName[] = $category->name;
+                }
+            }
+            $view->with('categories', $categoriesName);
         });
     }
 

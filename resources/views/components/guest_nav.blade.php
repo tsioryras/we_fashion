@@ -7,8 +7,8 @@
         </li>
         @forelse($categories as $category)
             <li class="nav-item">
-                <a class="nav-link" href="{{route('product_category',['category'=>$category->name])}}">
-                    {{strtoupper($category->name)}}
+                <a class="nav-link" href="{{route('product_category',['category'=>$category])}}">
+                    {{strtoupper($category)}}
                 </a>
             </li>
         @empty

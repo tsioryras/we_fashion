@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 class HomeController extends Controller
 {
     private $paginate = 6;
-    private $cacheTime = 5;
+    private $cacheTime = 0;
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

@@ -19,12 +19,13 @@ class PictureSeeder extends Seeder
         $storage = storage_path('app/public/img/products/');
         $defaultImages = storage_path('defaultImages/');
         $this->call(ProductSeeder::class);
-        $MenProducts = Product::where('category_id', '=', 1)->get();
-        $WomenProducts = Product::where('category_id', '=', 2)->get();
+
+        $menProducts = Product::where('category_id', '=', 1)->get();
+        $womenProducts = Product::where('category_id', '=', 2)->get();
 
         foreach (scandir($defaultImages) as $directory) {
             if ($directory != '.' && $directory != '..') {
-                $products = ($directory == 'homme') ? $MenProducts : $WomenProducts;
+                $products = ($directory == 'homme') ? $menProducts : $womenProducts;
 
                 foreach (scandir($defaultImages . '/' . $directory) as $index => $file) {
                     if ($file != '.' && $file != '..') {
