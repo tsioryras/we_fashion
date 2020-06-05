@@ -116,10 +116,6 @@
                     @endif
                     <div id="picture_preview_card"
                          @if(($edit && !isset($product->picture)) || !$edit)class="d-none"@endif>
-                        <button type="button" id="remove_picture" class="btn btn-sm btn-outline-danger">
-                            supprimer
-                        </button>
-                        <br>
                         <input type="hidden" name="picture_src" id="picture_src" value="">
                         <img id="picture_preview"
                              src="@if($edit && isset($product) && isset($product->picture)){{asset('storage/img/products/'.$product->category->name.'/'.$product->picture->link)}}@endif"
@@ -229,14 +225,6 @@
                 $('#picture_preview_card').removeClass('d-none');
                 $('.hint_picture').html('Changer l\'image');
             });
-
-            $('#remove_picture').on('click', function () {
-                $('#picture_preview').attr('src', '');
-                $('#picture_preview_card').addClass('d-none');
-                $('#picture_src').val('');
-            });
-
-            console.log($('#picture_src').val());
         });
     </script>
 @endsection

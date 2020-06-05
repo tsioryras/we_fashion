@@ -1,28 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1></h1>
+    <div class="row">
+        <div class="col-md-2"> {{strtoupper($slug)}}</div>
+        <div class="offset-8">
+            <button type="button" class="btn-outline-success btn notif">
+                {{$count.' produits '}}
+            </button>
+        </div>
+
+    </div>
     <div class="row">
         @forelse($products as $product)
             <div class="col-md-4">
-                <div class="card bg-light mb-3">
-                    <div class="card-header">
-                        <a href="{{route('product',['id'=>$product->id])}}">
-                            <img src="{{asset('storage/img/products/'.$product->category->name.'/'.$product->picture->link)}}"
-                                 class="img-thumbnail">
+                <a class="article" href="{{route('product',['id'=>$product->id])}}">
+                    <div class="card bg-light mb-3 img-thumbnail">
+                        <div class="card-header text-center">
+                            <img src="{{asset('storage/img/products/'.$product->category->name.'/'.$product->picture->link)}}">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{$product->name}}</h4>
+                            <div class="description">
+                                {{ Str::limit($product->description, 50, $end='...') }}
+                            </div>
                             <p class="text-secondary">
                                 <small>{{ucfirst('prix :')}}</small>
                                 <small>{{$product->price}} €</small>
                             </p>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">{{$product->name}}</h4>
-                        <div class="description">
-                            {{ Str::limit($product->description, 50, $end='...') }}
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         @empty
             <h3>{{ucfirst('aucun produit trouvé')}}</h3>

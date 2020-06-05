@@ -16,8 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $count = Product::all()->count();
         $products = Product::paginate(6);
-        return view('Home.index', ['products' => $products]);
+        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => 'accueil']);
     }
 
     /**
@@ -27,8 +28,9 @@ class HomeController extends Controller
     public function byCategory($slug)
     {
         $category = Category::where('name', '=', $slug)->first();
+        $count = $products = Product::where('category_id', '=', $category->id)->count();
         $products = Product::where('category_id', '=', $category->id)->paginate(6);
-        return view('Home.index', ['products' => $products]);
+        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => $slug]);
     }
 
     /**
@@ -38,7 +40,9 @@ class HomeController extends Controller
     public function byCode($slug = "onSale")
     {
         $products = Product::where('code', '=', $slug)->paginate(6);
-        return view('Home.index', ['products' => $products]);
+        $count = Product::where('code', '=', $slug)->count();
+        $slug = 'en solde';
+        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => $slug]);
     }
 
     /**
