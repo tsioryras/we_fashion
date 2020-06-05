@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class HomeController
@@ -11,15 +12,27 @@ use App\Product;
  */
 class HomeController extends Controller
 {
+    private $paginate = 6;
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $count = Product::all()->count();
-        $products = Product::paginate(6);
+        $prefix = request()->page ?? '1';
+        $path = 'home.page.' . $prefix;
 
-        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => 'accueil']);
+        $products = Cache::remember($path, now()->addMinutes(5), function () {
+            return Product::with('picture', 'category')->paginate($this->paginate); // pagination
+        });
+
+        $count = Cache::remember('products.count', now()->addHour(), function () {
+            return Product::all()->count();
+        });
+
+        $slug = 'accueil';
+
+        return view('Home.index', compact('products', 'count', 'slug'));
     }
 
     /**
@@ -28,12 +41,20 @@ class HomeController extends Controller
      */
     public function byCategory($slug)
     {
+        $prefix = request()->page ?? '1';
+        $path = 'home.' . $slug . '.page.' . $prefix;
+
         $category = Category::where('name', '=', $slug)->first();
-        $count = $products = Product::where('category_id', '=', $category->id)->count();
-        $products = Product::where('category_id', '=', $category->id)->paginate(6);
 
-        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => $slug]);
+        $count = Cache::remember('products' . $slug . '.count', now()->addHour(), function () use ($category) {
+            return Product::where('category_id', '=', $category->id)->count();
+        });
 
+        $products = Cache::remember($path, now()->addMinutes(5), function () use ($category) {
+            return Product::where('category_id', '=', $category->id)->with('picture', 'category')->paginate($this->paginate); // pagination
+        });
+
+        return view('Home.index', compact('products', 'count', 'slug'));
     }
 
     /**
@@ -42,10 +63,20 @@ class HomeController extends Controller
      */
     public function byCode($slug = "onSale")
     {
-        $products = Product::where('code', '=', $slug)->paginate(6);
-        $count = Product::where('code', '=', $slug)->count();
+        $prefix = request()->page ?? '1';
+        $path = 'home.' . $slug . '.page.' . $prefix;
+
+        $count = Cache::remember('products' . $slug . '.count', now()->addHour(), function () use ($slug) {
+            return Product::where('code', '=', $slug)->count();
+        });
+
+        $products = Cache::remember($path, now()->addMinutes(5), function () use ($slug) {
+            return Product::where('code', '=', $slug)->paginate($this->paginate); // pagination
+        });
+
         $slug = 'en solde';
-        return view('Home.index', ['products' => $products, 'count' => $count, 'slug' => $slug]);
+
+        return view('Home.index', compact('products', 'count', 'slug'));
     }
 
     /**
