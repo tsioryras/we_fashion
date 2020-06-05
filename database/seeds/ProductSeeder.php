@@ -22,7 +22,6 @@ class ProductSeeder extends Seeder
             $category = Category::find($id);
             $product->category()->associate($category);
             $product->save();
-            dump($id);
         });
     }
 }

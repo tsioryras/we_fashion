@@ -35,8 +35,8 @@ class PictureSeeder extends Seeder
                         $picture = factory(Picture::class)->create();
                         $picture->name = explode('.', $file)[0];
                         $picture->link = $file;
-                        $category = Category::where('name', '=', $directory)->first();
-                        $picture->category()->associate($category);
+//                        $category = Category::where('name', '=', $directory)->first();
+//                        $picture->category()->associate($category);
                         $picture->product()->associate($products[$index - 2]);
                         $picture->save();
                     }

@@ -15,9 +15,7 @@ class AlterPicturesTable extends Migration
     {
         Schema::table('pictures', function (Blueprint $table) {
             $table->unsignedInteger('product_id')->nullable();
-            $table->unsignedInteger('category_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
         });
     }
 

@@ -83,7 +83,6 @@ class ProductController extends Controller
             $picture->name = $request->input('name') . "_image";
             copy($newFile, $this->pictureFolder . $category->name . '/' . $pictureLink);
 
-            $picture->category()->associate($category);
             $picture->product()->associate($product);
             $picture->save();
         }
@@ -154,14 +153,12 @@ class ProductController extends Controller
             $picture->name = $request->input('name') . "_image";
             copy($newFile, $this->pictureFolder . $category->name . '/' . $pictureLink);
 
-            $picture->category()->associate($category);
             $picture->product()->associate($product);
             $picture->save();
         }
 
         if ($picture != null && $request->input('picture_src') == null) {
             $picture->product()->dissociate();
-            $picture->category()->dissociate();
             $image = $this->pictureFolder . $product->category->name . '/' . $picture->link;
             if (file_exists($image) && !is_dir($image)) {
                 unlink($this->pictureFolder . $category->name . '/' . $picture->link);
@@ -188,7 +185,6 @@ class ProductController extends Controller
         if ($picture != null) {
             $image = $this->pictureFolder . $product->category->name . '/' . $picture->link;
             if (file_exists($image) && !is_dir($image)) {
-                $picture->product()->dissociate();
                 unlink($image);
                 $picture->delete();
             }
