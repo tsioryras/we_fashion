@@ -135,6 +135,10 @@ footer a {
 
 .nav-link:hover {
     color: var(--main-color) !important;
+}
+
+#app {
+    min-height: 499px;
 }@charset "UTF-8";
 
 /*!
