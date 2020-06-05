@@ -1,19 +1,29 @@
 @extends('components.dataTable')
 
 @section('onTable')
-    <a type="button" title="créer" class="btn btn-outline-dark" href="{{route('products.create')}}">
-        {{ucfirst('ajouter un nouveau produit ')}}<i class="fa fa-plus"></i>
-    </a>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a type="button" title="créer" class="btn btn-outline-dark" href="{{route('products.create')}}">
+                {{ucfirst('ajouter un nouveau produit ')}}<i class="fa fa-plus"></i>
+            </a>
+        </div>
+        <div class="col-md-6 text-right">
+            <span class="btn btn-outline-dark">
+            {{ucfirst('Liste des produits')}}
+            </span>
+        </div>
+    </div>
 @endsection
 
 @section('thead')
     <th>#</th>
-    <th>{{strtoupper('nom')}}</th>
-    <th>{{strtoupper('categorie')}}</th>
-    <th>{{strtoupper('prix')}}</th>
-    <th>{{strtoupper('taille')}}</th>
-    <th>{{strtoupper('etat')}}</th>
-    <th>{{strtoupper('actions')}}</th>
+    <th>{{ucfirst('nom')}}</th>
+    <th>{{ucfirst('categorie')}}</th>
+    <th>{{ucfirst('prix')}}</th>
+    <th>{{ucfirst('taille')}}</th>
+    <th>{{ucfirst('etat')}}</th>
+    <th>{{ucfirst('actions')}}</th>
 @endsection
 
 @section('tbody')

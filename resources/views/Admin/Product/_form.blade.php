@@ -192,7 +192,13 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" title="enregistrer"
-                            class="btn btn-success">{{ucfirst('enregistrer')}}</button>
+                            class="btn btn-success">
+                        @if($edit)
+                            {{ucfirst('modifier')}}
+                        @else
+                            {{ucfirst('ajouter')}}
+                        @endif
+                    </button>
                 </div>
             </div>
         </div>

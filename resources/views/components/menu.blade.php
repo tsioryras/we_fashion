@@ -8,9 +8,6 @@
             <span class="navbar-brand">
                 {{strtoupper(config('app.name'))}}
             </span>
-            <a href="{{ route('product_home') }}">
-                {{strtoupper(config('app.name'))}}
-            </a>
         @endif
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +15,6 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
             @guest
                 @include('components.guest_nav')
             @else
@@ -28,7 +24,6 @@
                     @include('components.guest_nav')
                 @endif
             @endif
-
         </div>
     </div>
 </nav>

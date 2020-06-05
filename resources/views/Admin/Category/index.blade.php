@@ -1,9 +1,19 @@
 @extends('components.dataTable')
 
 @section('onTable')
-    <button type="button" class="btn btn-outline-dark" data-toggle="modal"
-            data-target="#create">{{ucfirst('nouvelle catégorie')}}
-    </button>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal"
+                    data-target="#create">{{ucfirst('nouvelle catégorie ')}}
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+        <div class="col-md-6 text-right">
+            <span class="btn btn-outline-dark">
+            {{ucfirst('Liste des catégories')}}
+            </span>
+        </div>
+    </div>
     <div class="modal fade" id="create" role="dialog">
         <div class="modal-dialog modal-sm">
             <form action="{{route('categories.store')}}" method="POST">
@@ -11,7 +21,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <small class="modal-title">Nouvelle catégorie</small>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
 
@@ -37,8 +46,8 @@
 @endsection
 @section('thead')
     <th>#</th>
-    <th>{{strtoupper('nom')}}</th>
-    <th>{{strtoupper('action')}}</th>
+    <th>{{ucfirst('nom')}}</th>
+    <th>{{ucfirst('action')}}</th>
 @endsection
 @section('tbody')
     @forelse($categories as $category)
@@ -47,10 +56,10 @@
             <td>{{ucfirst($category->name)}}</td>
             <td>
                 <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#edit{{$category->id}}">
-                    {{ucfirst('edit')}}
+                    <i class="fa fa-pencil"></i>
                 </button>
                 <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delete{{$category->id}}">
-                    {{ucfirst('delete')}}
+                    <i class="fa fa-trash"></i>
                 </button>
             </td>
         </tr>
@@ -63,7 +72,6 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <small class="modal-title">Modification catégorie</small>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">

@@ -1,5 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);:root {
-    --main-color: #66EB9A;
+    --main-color: #66EB9A !important;
+    --light-black: rgba(255, 255, 255, 0.5) !important;
+    --smouth-white: rgba(0, 0, 0, 0.7) !important;
 }
 
 .navbar-brand {
@@ -60,7 +62,7 @@ a:hover {
 }
 
 textarea#description {
-    min-height: 150px;
+    min-height: 118px;
     text-align: left;
 }
 
@@ -87,7 +89,7 @@ li.code {
 }
 
 footer li a, footer {
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: var(--light-black) !important;
 }
 
 .notif {
@@ -97,15 +99,30 @@ footer li a, footer {
 
 .notif:hover {
     background: transparent !important;
-    color: var(--main-color) !important;
+    color: var(--main-color);
 }
 
 .article {
-    color: rgba(0, 0, 0, 0.7) !important;
+    color: var(--smouth-white);
 }
 
 .article img {
     max-height: 300px;
+}
+
+span.btn:hover {
+    background-color: transparent !important;
+    cursor: unset !important;
+    color: black !important;
+}
+
+.admin-icons li {
+    margin-right: 2rem;
+}
+
+.footer-copyright{
+    padding-top: 0px!important;
+    padding-bottom: 1rem!important;
 }@charset "UTF-8";
 
 /*!
