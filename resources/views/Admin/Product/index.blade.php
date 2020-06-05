@@ -1,8 +1,8 @@
 @extends('components.dataTable')
 
 @section('onTable')
-    <a type="button" class="btn btn-outline-dark" href="{{route('products.create')}}">
-        {{ucfirst('ajouter un nouveau produit ')}}<i class="fas fa-plus"></i>
+    <a type="button" title="créer" class="btn btn-outline-dark" href="{{route('products.create')}}">
+        {{ucfirst('ajouter un nouveau produit ')}}<i class="fa fa-plus"></i>
     </a>
 @endsection
 
@@ -34,11 +34,12 @@
             </td>
             <td>{{ucfirst($product->status)}}</td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" href="{{route('products.edit',$product->id)}}">
-                    <i class="fas fa-pencil"></i>
+                <a class="btn btn-sm btn-outline-dark" title="modifier" href="{{route('products.edit',$product->id)}}">
+                    <i class="fa fa-pencil"></i>
                 </a>
-                <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#delete{{$product->id}}">
-                    <i class="fas fa-trash"></i>
+                <button class="btn btn-sm btn-outline-danger" title="supprimer" data-toggle="modal"
+                        data-target="#delete{{$product->id}}">
+                    <i class="fa fa-trash"></i>
                 </button>
                 <!-- Modal de suppression-->
                 <div class="modal fade" id="delete{{$product->id}}" tabindex="-1" role="dialog"
